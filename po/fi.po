@@ -52,9 +52,6 @@ msgstr "Ulkoiset varmenteet"
 msgid "IDS_ST_BODY_FALSE"
 msgstr "Epätosi"
 
-msgid "IDS_ST_BODY_INSTALL_CERTIFICATES_FROM_SD_CARD_Q"
-msgstr "Asennetaanko varmenteet SD-kortilta?"
-
 msgid "IDS_ST_BODY_KEY_USAGE_C"
 msgstr "Avaimen käyttö:"
 
@@ -78,9 +75,6 @@ msgstr "Allekirjoitusalgoritmi:"
 
 msgid "IDS_ST_BODY_TRUE"
 msgstr "Tosi"
-
-msgid "IDS_ST_BODY_TRUSTED_ROOT_CERTIFICATES"
-msgstr "Luotettavat päävarmenteet"
 
 msgid "IDS_ST_BODY_USER_CERTIFICATES"
 msgstr "Käyttäjävarmenteet"
@@ -126,4 +120,10 @@ msgstr "Sarjanumero:"
 
 msgid "IDS_ST_HEADER_INSTALL_CERTIFICATE_ABB"
 msgstr "Asenna varmenne"
+
+msgid "IDS_ST_BODY_TRUSTED_ROOT_CA_CERTIFICATES"
+msgstr "Luotettavat myöntäjävarmenteet"
+
+msgid "IDS_ST_POP_CERTIFICATES_FROM_THE_DEVICE_MEMORY_AND_SD_CARD_WILL_BE_INSTALLED"
+msgstr "Laitteen muistissa ja SD-kortilla olevat varmenteet asennetaan"
 
