@@ -2,7 +2,7 @@
 Name:    cert-svc-ui
 Summary: Certification service
 Version: 1.0.1
-Release: 51
+Release: 0
 Group:   System/Libraries
 License: SAMSUNG
 Source0: %{name}-%{version}.tar.gz
@@ -69,4 +69,4 @@ rm -rf %{buildroot}
 %{_ugdir}/lib/libug-setting-manage-certificates-efl.so
 %{_ugdir}/lib/libug-cert-selection-ug-efl.so*
 %{_ugdir}/res/locale/*/LC_MESSAGES/*
-%{_datadir}/license/%{name}
+%license %{_datadir}/license/%{name}
