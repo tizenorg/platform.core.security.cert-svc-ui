@@ -31,6 +31,9 @@ BuildRequires: pkgconfig(icu-i18n)
 BuildRequires: pkgconfig(bundle)
 BuildRequires: pkgconfig(capi-appfw-application)
 BuildRequires: pkgconfig(efl-assist)
+BuildRequires: pkgconfig(libtzplatform-config)
+
+Requires:libtzplatform-config
 
 %description
 Certification service
@@ -43,7 +46,7 @@ cp %{SOURCE1001} .
 
 %build
 %{!?build_type:%define build_type "Release"}
-cmake . -DCMAKE_INSTALL_PREFIX="%{_ugdir}" -DCMAKE_BUILD_TYPE=%{build_type} -DPKGNAME="cert-svc1-ui"
+cmake . -DCMAKE_INSTALL_PREFIX="%{_ugdir}" -DCMAKE_BUILD_TYPE=%{build_type} -DPKGNAME="cert-svc1-ui" -DTZ_SYS_SMACK=%{TZ_SYS_SMACK} -DTZ_SYS_BIN=%{TZ_SYS_BIN}
 #VERBOSE=1 make
 make
 
@@ -63,7 +66,7 @@ rm -rf %{buildroot}
 %files
 %manifest %{name}.manifest
 %defattr(-,root,root,-)
-/etc/smack/accesses2.d/ug.%{name}.include
+%{TZ_SYS_SMACK}/accesses2.d/ug.%{name}.include
 %{_ugdir}/lib/libmgr-cert-view.so
 %{_ugdir}/lib/libug-setting-manage-certificates-efl.so.*
 %{_ugdir}/lib/libug-setting-manage-certificates-efl.so
