@@ -22,6 +22,9 @@ SET(TARGET_CERT_VIEW "mgr-cert-view")
 SET(TARGET_CERT_SELECTION_UG "ug-cert-selection-ug-efl")
 SET(TARGET_CERT_MANAGER_UG "ug-setting-manage-certificates-efl")
 
+SET(TZ_SYS_SMACK "${TZ_SYS_SMACK}")
+SET(TZ_SYS_BIN "${TZ_SYS_BIN}")
+
 ADD_DEFINITIONS("-DPREFIX=\"${PREFIX}\"")
 ADD_DEFINITIONS("-DPKGNAME=\"${PKGNAME}\"")
 ADD_DEFINITIONS("-DPACKAGE_NAME=\"${PKGNAME}\"")
@@ -40,4 +43,4 @@ ADD_SUBDIRECTORY(cert-selection-ug)
 # i18n
 ADD_SUBDIRECTORY(po)
 
-INSTALL(FILES packaging/ug.cert-svc-ui.include DESTINATION /etc/smack/accesses2.d)
+INSTALL(FILES packaging/ug.cert-svc-ui.include DESTINATION ${TZ_SYS_SMACK}/accesses2.d)
