@@ -1,3 +1,12 @@
+Code-Review+2: Casey Schaufler <casey.schaufler@intel.com>
+Code-Review+1: Philippe Coval <philippe.coval@open.eurogiciel.org>
+Verified+1: Philippe Coval <philippe.coval@open.eurogiciel.org>
+Submitted-by: Michael Leibowitz <michael.leibowitz@intel.com>
+Submitted-at: Tue, 11 Mar 2014 09:30:56 -0700
+Reviewed-on: https://review.tizen.org/gerrit/17056
+Project: platform/core/security/cert-svc-ui
+Branch: refs/heads/tizen
+
 Reviewed-on: https://review.tizen.org/gerrit/17056
 Project: platform/core/security/cert-svc-ui
 Branch: refs/heads/tizen
