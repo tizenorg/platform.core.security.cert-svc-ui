@@ -772,43 +772,6 @@ Evas_Object *create_no_content_layout(struct ug_data *ad)
 	return no_content;
 }
 
-const char *get_email(CertSvcString alias)
-{
-	struct ug_data *ad = get_ug_data();
-
-	const char *char_buffer;
-
-	CertSvcCertificateList certificateList;
-	CertSvcCertificate certificate;
-	CertSvcString email_buffer;
-	if (CERTSVC_SUCCESS != certsvc_pkcs12_load_certificate_list(
-			ad->instance,
-			alias,
-			&certificateList))
-		return dgettext(PACKAGE, "IDS_ST_BODY_NO_DATA");
-
-	if (CERTSVC_SUCCESS != certsvc_certificate_list_get_one(
-			certificateList,
-			0,
-			&certificate))
-		return dgettext(PACKAGE, "IDS_ST_BODY_NO_DATA");
-
-	if (CERTSVC_SUCCESS != certsvc_certificate_get_string_field(
-			certificate,
-			CERTSVC_SUBJECT_EMAIL_ADDRESS,
-			&email_buffer))
-		return dgettext(PACKAGE, "IDS_ST_BODY_NO_DATA");
-
-	certsvc_string_to_cstring(email_buffer, &char_buffer, NULL);
-	if (!char_buffer) {
-		LOGD("email is NULL; return NO_DATA");
-		return dgettext(PACKAGE, "IDS_ST_BODY_NO_DATA");
-	}
-
-	LOGD("get_email - return %s", char_buffer);
-	return char_buffer;
-}
-
 bool isEmptyStr(const char *str)
 {
 	if (!str || '\0' == str[0])

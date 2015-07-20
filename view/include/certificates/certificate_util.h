@@ -116,7 +116,6 @@ void clear_pfx_genlist_data              ();
  **/
 char *path_cat(const char *str1, char *str2);
 char *extractDataFromCert(char *path);
-const char* get_email(CertSvcString alias);
 
 //void back_cb          (void *data, Evas_Object *obj, void *event_info);
 Eina_Bool back_cb (void *data, Elm_Object_Item *it);

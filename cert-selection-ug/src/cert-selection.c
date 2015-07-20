@@ -37,7 +37,6 @@
 #define CERT_SVC_UI_RES_PATH "/usr/ug/res/images/cert-svc-ui"
 
 static CertSvcInstance   instance;
-static CertSvcStringList stringList;
 
 static int             state_index    = -1; //selected radio index
 static char            *selected_name = NULL;
@@ -66,14 +65,11 @@ static void _move_more_ctxpopup(void *data);
 static void _cert_selection_cleanup()
 {
 	LOGD("_cert_selection_cleanup");
-	if (selected_name)
-	{
+	if (selected_name) {
 		free(selected_name);
 		selected_name = NULL;
 	}
 
-	certsvc_string_list_free(stringList);
-	memset(&stringList, 0, sizeof(stringList));
 	certsvc_instance_free(instance);
 }
 
@@ -247,36 +243,6 @@ static void _open(void *data, Evas_Object *obj, void *event_info) {
     }
 
     _quit_cb(data, NULL);
-}
-
-const char* get_email(CertSvcString alias) {
-    LOGD("get_email()");
-
-    const char *char_buffer;
-
-    CertSvcCertificateList certificateList;
-    CertSvcCertificate certificate;
-    CertSvcString email_buffer;
-    if (CERTSVC_SUCCESS != certsvc_pkcs12_load_certificate_list(
-            instance,
-            alias,
-            &certificateList)) {
-        return NULL;
-    }
-    if (CERTSVC_SUCCESS != certsvc_certificate_list_get_one(
-            certificateList,
-            0,
-            &certificate)) {
-        return NULL;
-    }
-    if (CERTSVC_SUCCESS != certsvc_certificate_get_string_field(
-            certificate,
-            CERTSVC_SUBJECT_EMAIL_ADDRESS,
-            &email_buffer)) {
-        return NULL;
-    }
-    certsvc_string_to_cstring(email_buffer, &char_buffer, NULL);
-    return char_buffer;
 }
 
 static void _gl_lang_changed(void *data, Evas_Object *obj, void *event_info)
@@ -571,11 +537,6 @@ void cert_selection_install_cb(void *data, Evas_Object *obj, void *event_info)
     itc.func.content_get = _gl_content_get;
     itc.func.state_get   = _gl_state_get;
     itc.func.del         = _gl_del;
-
-    if (certsvc_instance_new(&instance) == CERTSVC_FAIL) {
-        LOGE("CERTSVC_FAIL");
-        return;
-    }
 
     create_selection_list(ad);
 
