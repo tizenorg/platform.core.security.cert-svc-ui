@@ -41,6 +41,7 @@ struct ug_data *get_ug_data()
 
 static void *on_create(ui_gadget_h ug, enum ug_mode mode, app_control_h service, void *priv)
 {
+	LOGD("Start create operation.");
 	struct ug_data *ugd = (struct ug_data *)priv;
 
 	if (!ug || !ugd)
@@ -101,19 +102,22 @@ static void *on_create(ui_gadget_h ug, enum ug_mode mode, app_control_h service,
 
 static void on_start(ui_gadget_h ug, app_control_h service, void *priv)
 {
+	LOGD("Start start operation.");
 }
 
 static void on_pause(ui_gadget_h ug, app_control_h service, void *priv)
 {
+	LOGD("Start pause operation.");
 }
 
 static void on_resume(ui_gadget_h ug, app_control_h service, void *priv)
 {
+	LOGD("Start resume operation.");
 }
 
 static void on_destroy(ui_gadget_h ug, app_control_h service, void *priv)
 {
-	LOGD("on_destroy");
+	LOGD("Start destroy operation.");
 
 	if (NULL == ug) {
 		LOGD("NULL == ug; return");
@@ -126,24 +130,26 @@ static void on_destroy(ui_gadget_h ug, app_control_h service, void *priv)
 
 	struct ug_data *ugd = (struct ug_data *)priv;
 
-	certsvc_instance_free(ugd->instance);
+	if(ugd) {
+		certsvc_instance_free(ugd->instance);
 
-	if (ugd->theme) {
-		elm_theme_free(ugd->theme);
-		ugd->theme = NULL;
+		if (ugd->theme)
+			ugd->theme = NULL;
+
+		evas_object_hide(ugd->layout_main);
+		evas_object_del(ugd->layout_main);
+		ugd->layout_main = NULL;
 	}
-
-	evas_object_hide(ugd->layout_main);
-	evas_object_del(ugd->layout_main);
-	ugd->layout_main = NULL;
 }
 
 static void on_message(ui_gadget_h ug, app_control_h msg, app_control_h service, void *priv)
 {
+	LOGD("Start message operation.");
 }
 
 static void on_event(ui_gadget_h ug, enum ug_event event, app_control_h service, void *priv)
 {
+	LOGD("Start event operation.");
 	switch (event) {
 	case UG_EVENT_LOW_MEMORY:
 		break;
@@ -166,6 +172,7 @@ static void on_event(ui_gadget_h ug, enum ug_event event, app_control_h service,
 
 static void on_key_event(ui_gadget_h ug, enum ug_key_event event, app_control_h service, void *priv)
 {
+	LOGD("Start key event operation.");
 	if (ug == NULL) {
 		LOGD("NULL == ug; return");
 		return;
@@ -173,6 +180,7 @@ static void on_key_event(ui_gadget_h ug, enum ug_key_event event, app_control_h 
 
 	switch (event) {
 	case UG_KEY_EVENT_END:
+		LOGD("Catch end key event.");
 		ug_destroy_me(ug);
 		break;
 	default:
@@ -202,7 +210,7 @@ UG_MODULE_API int UG_MODULE_INIT(struct ug_module_ops *ops)
 	ops->event = on_event;
 	ops->key_event = on_key_event;
 	ops->priv = ugd;
-	ops->opt = UG_OPT_INDICATOR_ENABLE;
+	ops->opt = UG_OPT_INDICATOR_ENABLE; // Enable both portait and landscape window
 
 	g_ugd = ugd;
 

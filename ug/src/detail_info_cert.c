@@ -494,6 +494,7 @@ void get_info_cert_from_file_cb(struct ug_data *ad, void *list)
 {
 	LOGD("get_info_cert_from_file_cb()");
 	struct ListElement *current = (struct ListElement *)list;
+	LOGD("gname : %s", current->gname);
 	if (certsvc_pkcs12_get_certificate_from_store(
 			ad->instance,
 			current->storeType,
